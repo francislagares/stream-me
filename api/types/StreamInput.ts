@@ -12,8 +12,8 @@ export class StreamInput implements Partial<Stream> {
   title: string;
 
   @Field({ nullable: true })
-  description: string;
+  description?: string;
 
-  @Field()
+  @Field({ nullable: true })
   url: string;
 }

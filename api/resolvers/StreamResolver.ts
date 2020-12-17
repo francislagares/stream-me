@@ -70,11 +70,11 @@ export class StreamResolver {
 
   @Mutation(() => Boolean)
   @UseMiddleware(isAuth)
-  async delete(
+  async deleteStream(
     @Arg('streamId', () => ObjectIdScalar) streamId: ObjectId,
-    ctx: MyContext
+    @Ctx() ctx: MyContext
   ): Promise<Boolean | undefined> {
-    const deleted = await StreamModel.findByIdAndDelete({
+    const deleted = await StreamModel.findOneAndDelete({
       _id: streamId,
       author: ctx.res.locals.userId,
     });
