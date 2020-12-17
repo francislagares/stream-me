@@ -2,7 +2,7 @@ import { Resolver, Query, UseMiddleware, Arg, Ctx } from 'type-graphql';
 import { ObjectId } from 'mongodb';
 import { MyContext } from '../types/MyContext';
 import { isAuth } from '../middleware/isAuth';
-import { User, UserModel } from 'models/User';
+import { User, UserModel } from '../models/User';
 import { ObjectIdScalar } from '../schema/object-id-scalar';
 
 @Resolver(() => User)
