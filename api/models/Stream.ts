@@ -4,7 +4,7 @@ import { Field, ObjectType } from 'type-graphql';
 import { User } from './User';
 import { Ref } from '../types/Ref';
 
-@ObjectType({ description: 'Stream embedded post content' })
+@ObjectType()
 export class Stream {
   @Field()
   readonly _id: ObjectId;
@@ -18,10 +18,10 @@ export class Stream {
   description: string;
 
   @Field()
-  @Property()
+  @Property({ required: true })
   url: string;
 
-  @Field()
+  @Field(() => User)
   @Property({ ref: User, required: true })
   author: Ref<User>;
 }
