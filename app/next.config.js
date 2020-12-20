@@ -3,16 +3,16 @@ module.exports = {
     config.module.rules.push({
       test: /\.graphql$/,
       exclude: /node_modules/,
-      user: [options.defaultLoaders.babel, { loader: 'graphql-let/loader' }],
+      use: [options.defaultLoaders.babel, { loader: 'graphql-let/loader' }],
     });
 
     config.module.rules.push({
       test: /\.graphqls$/,
       exclude: /node_modules/,
-      user: [options.defaultLoaders.babel, { loader: 'graphql-let/loader' }],
+      use: ['graphql-let/schema/loader'],
     });
 
-    config.rules.push({
+    config.module.rules.push({
       test: /\.ya?ml$/,
       type: 'json',
       use: 'yaml-loader',
