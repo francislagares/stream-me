@@ -7,6 +7,8 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import { themeDark, themeLight } from 'lib/theme';
 import { ApolloProvider } from '@apollo/client';
 import { useApollo } from 'lib/apollo';
+import { AuthProvider } from 'lib/useAuth';
+import Header from 'components/Header';
 
 const App = ({ Component, pageProps }: AppProps): JSX.Element => {
   const apolloClient = useApollo(pageProps.initialApolloState);
@@ -26,7 +28,10 @@ const App = ({ Component, pageProps }: AppProps): JSX.Element => {
     <ApolloProvider client={apolloClient}>
       <ThemeProvider theme={darkTheme ? themeDark : themeLight}>
         <CssBaseLine />
-        <Component {...pageProps} />
+        <AuthProvider>
+          <Header darkState={darkTheme} handleThemeChange={handleThemeChange} />
+          <Component {...pageProps} />
+        </AuthProvider>
       </ThemeProvider>
     </ApolloProvider>
   );
