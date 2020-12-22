@@ -4,8 +4,8 @@ Web streaming service built with React, Next.js, TypeScript, GraphQL and Apollo 
 
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/francislagares/stream-me/CI?style=for-the-badge&labelColor=black&logo=github)
 
-
 # Built with
+
 <p>
   <a href='https://nextjs.org/'>
     <img src="https://img.shields.io/badge/next.js-ffffff?style=for-the-badge&logo=next.js&logoColor=000" />
@@ -58,12 +58,12 @@ This project is a web streaming service that allows users to upload and share th
 - React / Next.js
 - Typescript
 - Material UI
-- GraphQL
+- GraphQL / TypeGraphQL
 - Apollo Server
 
 ## Installation and Usage
 
-Prerequisites: 
+Prerequisites:
 
 - [Node.js](https://nodejs.org/en/)
 - [Next.js](https://nextjs.org/)
@@ -83,7 +83,7 @@ $ git clone https://github.com/francislagares/stream-me
 - Switch into directory
 
 ```shell
-$ cd stream-me/app
+$ cd stream-me
 ```
 
 - Install dependencies
@@ -94,20 +94,17 @@ $ yarn install
 
 ### Dev Mode
 
-
-
 - Run server
 
 ```shell
-$ yarn start
+$ yarn dev
 ```
 
-- Browser will open automatically at http://localhost:3000
-
+- Browser will open automatically at http://localhost:8000
 
 ## Status
 
-Currently: _in development..._
+Currently: _finished_
 
 ## Contact
 

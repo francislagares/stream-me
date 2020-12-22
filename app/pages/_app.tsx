@@ -1,40 +1,41 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-constant-condition */
-import { useEffect, useState } from 'react';
-import { AppProps } from 'next/app';
-import CssBaseLine from '@material-ui/core/CssBaseline';
+import { useState } from 'react';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
-import { themeDark, themeLight } from 'lib/theme';
+import { useEffect } from 'react';
 import { ApolloProvider } from '@apollo/client';
-import { useApollo } from 'lib/apollo';
 import { AuthProvider } from 'lib/useAuth';
+
+import { useApollo } from '../lib/apollo';
+import { themeDark, themeLight } from '../lib/theme';
 import Header from 'components/Header';
 
-const App = ({ Component, pageProps }: AppProps): JSX.Element => {
-  const apolloClient = useApollo(pageProps.initialApolloState);
-  const [darkTheme, setDarkTheme] = useState(false);
-  const handleThemeChange = (): void => {
-    setDarkTheme(!darkTheme);
+export default function MyApp({ Component, pageProps }) {
+  const [darkState, setDarkState] = useState(false);
+  const handleThemeChange = () => {
+    setDarkState(!darkState);
   };
 
-  // Remove the server-side injected CSS
+  const apolloClient = useApollo(pageProps.initialApolloState);
+
   useEffect(() => {
+    // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles && jssStyles.parentNode) {
       jssStyles.parentNode.removeChild(jssStyles);
     }
   }, []);
+
   return (
     <ApolloProvider client={apolloClient}>
-      <ThemeProvider theme={darkTheme ? themeDark : themeLight}>
-        <CssBaseLine />
+      <ThemeProvider theme={darkState ? themeDark : themeLight}>
+        <CssBaseline />
         <AuthProvider>
-          <Header darkState={darkTheme} handleThemeChange={handleThemeChange} />
+          <Header darkState={darkState} handleThemeChange={handleThemeChange} />
           <Component {...pageProps} />
         </AuthProvider>
       </ThemeProvider>
     </ApolloProvider>
   );
-};
-
-export default App;
+}

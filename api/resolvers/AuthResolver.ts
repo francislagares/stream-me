@@ -10,28 +10,26 @@ import { UserResponse } from '../types/UserResponse';
 export class AuthResolver {
   @Mutation(() => UserResponse)
   async register(
-    @Arg('input') { email, password }: AuthInput
+    @Arg('input')
+    { email, password }: AuthInput
   ): Promise<UserResponse> {
-    // 1. Check for an existing email
     const existingUser = await UserModel.findOne({ email });
 
     if (existingUser) {
       throw new Error('Email already in use');
     }
 
-    // 2. Create new user with hashed password
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new UserModel({ email, password: hashedPassword });
     await user.save();
 
-    // 3. Store user id on the token payload
     const payload = {
       id: user.id,
     };
 
     const token = jwt.sign(
       payload,
-      process.env.SESSION_SECRET || 'asldkfjoiq12312'
+      process.env.SESSION_SECRET || 'aslkdfjoiq12312'
     );
 
     return { user, token };
@@ -41,30 +39,28 @@ export class AuthResolver {
   async login(
     @Arg('input') { email, password }: AuthInput
   ): Promise<UserResponse> {
-    // 1. Check for an existing email
-    const existingUser = await UserModel.findOne({ email });
+    const user = await UserModel.findOne({ email });
 
-    if (!existingUser) {
-      throw new Error('Invalid login');
+    if (!user) {
+      throw new Error('Invalid Login');
     }
 
-    // 2. Check if password is valid
-    const valid = await bcrypt.compare(password, existingUser.password);
+    const valid = await bcrypt.compare(password, user.password);
 
     if (!valid) {
-      throw new Error('Invalid login');
+      throw new Error('Invalid Login');
     }
 
-    // 3. Store user id on the token payload
     const payload = {
-      id: existingUser.id,
+      id: user.id,
     };
 
+    // Store it on session object
     const token = jwt.sign(
       payload,
-      process.env.SESSION_SECRET || 'asldkfjoiq12312'
+      process.env.SESSION_SECRET || 'aslkdfjoiq12312'
     );
 
-    return { user: existingUser, token };
+    return { user, token };
   }
 }

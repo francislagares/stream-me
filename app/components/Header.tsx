@@ -4,7 +4,7 @@ import { AppBar, Toolbar, Typography, Button, Link as LinkText, Switch } from '@
 import Link from 'next/link';
 import { useAuth } from 'lib/useAuth';
 
-export default function Header({ darkState, handleThemeChange }): JSX.Element {
+export default function Header({ darkState, handleThemeChange }) {
   const classes = useStyles();
   const { user } = useAuth();
 
