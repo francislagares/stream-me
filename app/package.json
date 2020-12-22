@@ -1,5 +1,5 @@
 {
-  "name": "stream-me",
+  "name": "@stream-me/app",
   "version": "1.0.0",
   "description": "Web Streaming Service",
   "main": "index.js",

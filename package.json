@@ -1,0 +1,18 @@
+{
+  "name": "stream-me",
+  "version": "1.0.0",
+  "main": "index.js",
+  "private": "true",
+  "scripts": {
+    "build": "yarn workspace @stream-me/app run build",
+    "start": "yarn workspace @stream-me/api run start",
+    "dev": "yarn workspace @stream-me/api run dev"
+  },
+  "workspaces": [
+    "api",
+    "app"
+  ],
+  "repository": "https://github.com/francislagares/stream-me.git",
+  "author": "Francis Lagares <francis.lagares@gmail.com>",
+  "license": "MIT"
+}
